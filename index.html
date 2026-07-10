@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New York — July 16–19</title>
+<style>
+  :root {
+    --paper: #FAF8F2;
+    --card: #FFFFFF;
+    --ink: #1C2430;
+    --muted: #5C6472;
+    --line: #E4E0D5;
+    --gold: #F5B700;
+    --gold-ink: #7A5E00;
+    --gold-soft: #FBF3D9;
+    --night: #1C2430;
+    --night-ink: #F7F4EA;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181F;
+      --card: #1D232D;
+      --ink: #EDE9DE;
+      --muted: #9AA1AD;
+      --line: #2E3542;
+      --gold: #F5B700;
+      --gold-ink: #F0C63F;
+      --gold-soft: #2A2716;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF8F2; --card: #FFFFFF; --ink: #1C2430; --muted: #5C6472;
+    --line: #E4E0D5; --gold: #F5B700; --gold-ink: #7A5E00; --gold-soft: #FBF3D9;
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181F; --card: #1D232D; --ink: #EDE9DE; --muted: #9AA1AD;
+    --line: #2E3542; --gold: #F5B700; --gold-ink: #F0C63F; --gold-soft: #2A2716;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0 1.1rem 4rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 660px; margin: 0 auto; }
+
+  a { color: inherit; text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--gold-ink); }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---------- header ---------- */
+  header { padding: 3rem 0 1.6rem; border-bottom: 3px solid var(--ink); }
+  .eyebrow {
+    font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold-ink); margin: 0 0 .6rem;
+  }
+  h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800; letter-spacing: -.02em; text-wrap: balance;
+    font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.05; margin: 0 0 .7rem;
+  }
+  .lede { color: var(--muted); font-size: 1rem; max-width: 46ch; margin: 0; }
+  .lede strong { color: var(--ink); }
+  .rules { margin: 1.2rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .3rem; font-size: .92rem; }
+  .rules li::before { content: "—"; color: var(--gold); font-weight: 700; margin-right: .5rem; }
+
+  /* ---------- book-now ---------- */
+  section { margin-top: 2.6rem; }
+  h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800; letter-spacing: -.01em; font-size: 1.35rem; margin: 0 0 .35rem;
+  }
+  .kicker { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 .4rem; }
+  .sub { color: var(--muted); font-size: .92rem; margin: 0 0 1.1rem; max-width: 52ch; }
+
+  .bookgrid { display: flex; flex-direction: column; gap: .55rem; }
+  .book {
+    display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--gold);
+    padding: .75rem .95rem; border-radius: 6px;
+  }
+  .book .when { font-variant-numeric: tabular-nums; font-weight: 700; font-size: .85rem; white-space: nowrap; min-width: 6.4rem; }
+  .book .what { flex: 1 1 12rem; font-size: .95rem; }
+  .book .what small { display: block; color: var(--muted); font-size: .82rem; }
+  .btn {
+    font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    background: var(--gold); color: #1C2430; text-decoration: none;
+    padding: .32rem .7rem; border-radius: 99px; white-space: nowrap;
+  }
+  .btn:hover { filter: brightness(1.06); color: #1C2430; }
+  .easy .book { border-left-color: var(--line); }
+  .easy .btn { background: var(--gold-soft); color: var(--gold-ink); }
+
+  /* ---------- must list ---------- */
+  .must { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  @media (max-width: 480px) { .must { grid-template-columns: 1fr; } }
+  .must h3 { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .5rem; }
+  .must ol { margin: 0; padding-left: 1.3rem; font-size: .95rem; display: flex; flex-direction: column; gap: .45rem; }
+  .must li::marker { color: var(--gold-ink); font-weight: 700; }
+  .must small { color: var(--muted); }
+
+  /* ---------- days ---------- */
+  .day { margin-top: 3rem; }
+  .dayhead { display: flex; align-items: center; gap: .9rem; border-bottom: 3px solid var(--ink); padding-bottom: .7rem; }
+  .bullet {
+    width: 2.6rem; height: 2.6rem; border-radius: 50%; flex: none;
+    background: var(--gold); color: #1C2430;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800; font-size: 1.15rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dayhead .t h2 { margin: 0; font-size: 1.25rem; }
+  .dayhead .t p { margin: .1rem 0 0; font-size: .85rem; color: var(--muted); }
+
+  .stops { list-style: none; margin: 0; padding: 0; }
+  .stop { display: flex; gap: 1rem; padding: 1.05rem 0; border-bottom: 1px solid var(--line); }
+  .stop:last-child { border-bottom: none; }
+  .time {
+    flex: none; width: 4.6rem; font-variant-numeric: tabular-nums;
+    font-weight: 700; font-size: .88rem; padding-top: .1rem;
+  }
+  .stop .body { flex: 1; min-width: 0; }
+  .stop h3 { margin: 0; font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em; }
+  .stop p { margin: .25rem 0 0; font-size: .92rem; color: var(--muted); max-width: 52ch; }
+  .stop p b { color: var(--ink); font-weight: 600; }
+  .meta { margin-top: .4rem; font-size: .8rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
+  .meta span { white-space: nowrap; }
+  .meta a { text-decoration-thickness: 1px; }
+  .why { font-family: Georgia, "Times New Roman", serif; font-style: italic; color: var(--gold-ink); font-size: .92rem; }
+
+  .rest { background: var(--gold-soft); border-radius: 6px; padding: 1.05rem 1rem; margin: .2rem 0; border-bottom: none; }
+  .rest h3 { color: var(--gold-ink); }
+
+  .swap { margin-top: 1rem; font-size: .85rem; color: var(--muted); border-left: 3px solid var(--line); padding-left: .9rem; }
+  .swap b { color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1.6rem; font-size: .9rem; }
+  @media (max-width: 480px) { .facts { grid-template-columns: 1fr; } }
+  .facts div b { display: block; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .15rem; }
+  .budget { margin-top: 1.6rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: .95rem 1.05rem; font-size: .92rem; }
+  .budget b { font-variant-numeric: tabular-nums; }
+  footer { margin-top: 3.2rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">You + her · The Evelyn, NoMad · Thu–Sun</p>
+  <h1>New York,<br>July 16–19</h1>
+  <p class="lede">Four days, <strong>one headline moment per day</strong>, and a real rest every afternoon. Every name below is a link — tap the place for its site, tap the address for directions.</p>
+  <ul class="rules">
+    <li>Nothing starts before 9:30 AM (except Saturday — worth it).</li>
+    <li>Timings include actual NYC traffic, not wishful thinking.</li>
+    <li>No either/or decisions. One plan; backups live in footnotes.</li>
+  </ul>
+</header>
+
+<section>
+  <p class="kicker">Do this first</p>
+  <h2>Book these 4 things today</h2>
+  <p class="sub">These genuinely sell out. Fifteen minutes now and the whole trip is locked.</p>
+  <div class="bookgrid">
+    <div class="book"><span class="when">Thu 6:45 PM</span><span class="what">SUMMIT One Vanderbilt — sunset slot<small>If sunset is gone, take ~9:30 PM — the city lights are just as good.</small></span><a class="btn" href="https://summitov.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Fri 6:15 PM</span><span class="what">Sunset schooner sail — Classic Harbor Line<small>2 hours past the Statue of Liberty. The most romantic thing on this trip.</small></span><a class="btn" href="https://www.sail-nyc.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Sat 8:00 PM</span><span class="what">Wicked — Gershwin Theatre<small>The first-timer Broadway pick. Buy direct; skip resale sites.</small></span><a class="btn" href="https://wickedthemusical.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Sun 6:30 PM</span><span class="what">The River Café — farewell dinner<small>Michelin star under the Brooklyn Bridge. Jacket required — pack one.</small></span><a class="btn" href="https://rivercafe.com" target="_blank" rel="noopener">Book</a></div>
+  </div>
+  <p class="sub" style="margin:1.4rem 0 .6rem">Then these four — easy to get, book once, done:</p>
+  <div class="bookgrid easy">
+    <div class="book"><span class="when">Thu 9:00 PM</span><span class="what">Upland — dinner, 2 min from the hotel</span><a class="btn" href="https://www.uplandnyc.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Fri 9:15 PM</span><span class="what">L'Artusi — West Village pasta</span><a class="btn" href="https://www.lartusi.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Sat 5:45 PM</span><span class="what">The Clocktower — pre-theater, 4 min from the hotel</span><a class="btn" href="https://www.theclocktowernyc.com" target="_blank" rel="noopener">Book</a></div>
+    <div class="book"><span class="when">Sun 11:30 AM</span><span class="what">Balthazar — SoHo brunch</span><a class="btn" href="https://balthazarny.com" target="_blank" rel="noopener">Book</a></div>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">The answer to "what do we absolutely have to try?"</p>
+  <h2>The Must List — 10 things, nothing else is mandatory</h2>
+  <div class="must">
+    <div>
+      <h3>Eat</h3>
+      <ol>
+        <li>A fold-and-walk slice at <a href="https://www.joespizzanyc.com" target="_blank" rel="noopener">Joe's Pizza</a> <small>(Fri)</small></li>
+        <li>A hand-rolled bagel with lox at <a href="https://www.ess-a-bagel.com" target="_blank" rel="noopener">Ess-a-Bagel</a> <small>(Sat)</small></li>
+        <li>The warm 6-oz cookie at <a href="https://levainbakery.com" target="_blank" rel="noopener">Levain</a> <small>(Sat)</small></li>
+        <li>One candlelit pasta night — <a href="https://www.lartusi.com" target="_blank" rel="noopener">L'Artusi</a> <small>(Fri)</small></li>
+        <li>One grand brasserie meal — <a href="https://balthazarny.com" target="_blank" rel="noopener">Balthazar</a> <small>(Sun)</small></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Do</h3>
+      <ol start="6">
+        <li>The skyline at sunset — <a href="https://summitov.com" target="_blank" rel="noopener">SUMMIT</a> <small>(Thu)</small></li>
+        <li>A sail past the Statue of Liberty <small>(Fri)</small></li>
+        <li>A rowboat on the Central Park Lake <small>(Sat)</small></li>
+        <li>A Broadway show <small>(Sat)</small></li>
+        <li>The Brooklyn Bridge at golden hour <small>(Sun)</small></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THURSDAY ============ -->
+<section class="day">
+  <div class="dayhead">
+    <div class="bullet">16</div>
+    <div class="t">
+      <h2>Thursday — Land easy, end high</h2>
+      <p>Hottest day (~92°F, dry) · Sunset 8:26 PM · Arrival day = two things, not six</p>
+    </div>
+  </div>
+  <ul class="stops">
+    <li class="stop"><span class="time">Arrival</span>
+      <div class="body"><h3>Check in — <a href="https://theevelyn.com" target="_blank" rel="noopener">The Evelyn</a></h3>
+      <p>Room not ready? The desk holds bags. Coffee at <a href="https://www.mamannyc.com" target="_blank" rel="noopener">Maman</a> around the corner, or Caffè Tusk inside the hotel. Then unpack, shower, do nothing. It's 92° out — the day starts at 5:30.</p>
+      <div class="meta"><span><a href="https://www.google.com/maps/search/?api=1&query=The+Evelyn+Hotel+7+E+27th+St+New+York" target="_blank" rel="noopener">7 E 27th St, NoMad</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">5:30 PM</span>
+      <div class="body"><h3>First look: Madison Square Park + the Flatiron</h3>
+      <p>Five minutes from your door. Her first postcard shot is the Flatiron from the park's south end. Split a Shake Shack burger at the original stand if you're peckish — dinner is late tonight.</p>
+      <div class="meta"><span>5-min walk</span><span>Free</span><span><a href="https://www.google.com/maps/search/?api=1&query=Madison+Square+Park+New+York" target="_blank" rel="noopener">Directions</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">6:15 PM</span>
+      <div class="body"><h3>Head to Grand Central → <a href="https://summitov.com" target="_blank" rel="noopener">SUMMIT One Vanderbilt</a>, 6:45 sunset slot</h3>
+      <p>Take the 6 train from 28th St two stops (10 min door to door ~25 with buffer). <b>The entrance is inside the Grand Central complex</b> — walk through the main concourse first: the green celestial ceiling, and the Whispering Gallery outside the Oyster Bar (stand in opposite corners of the arch and whisper — she'll hear every word). Then 90 minutes of mirrored sky rooms as the sun drops at 8:26.</p>
+      <p class="why">Wear something colorful — the floors are mirrored too (heads-up on her outfit), and heels aren't allowed.</p>
+      <div class="meta"><span>Subway 6 · ~25 min all-in</span><span>$44–58 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=SUMMIT+One+Vanderbilt+45+E+42nd+St" target="_blank" rel="noopener">45 E 42nd St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">9:00 PM</span>
+      <div class="body"><h3>Dinner — <a href="https://www.uplandnyc.com" target="_blank" rel="noopener">Upland</a></h3>
+      <p>Glowing, jar-lined Californian-Italian, <b>two minutes from your bed</b>. Note on the booking that it's her first trip to New York — NYC kitchens genuinely do nice things with that.</p>
+      <div class="meta"><span>2-min walk from hotel</span><span>~$70–90 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=Upland+345+Park+Ave+S+New+York" target="_blank" rel="noopener">345 Park Ave S</a></span></div></div>
+    </li>
+  </ul>
+  <p class="swap"><b>Only if you're still standing:</b> a nightcap at The Tusk Bar inside your own hotel (zero effort), or the classic Empire State view at <a href="https://www.230-fifth.com" target="_blank" rel="noopener">230 Fifth</a>, two minutes away. Skipping both is also correct — you just landed.</p>
+</section>
+
+<!-- ============ FRIDAY ============ -->
+<section class="day">
+  <div class="dayhead">
+    <div class="bullet">17</div>
+    <div class="t">
+      <h2>Friday — West Side morning, sunset sail</h2>
+      <p>86–89°F · Small chance of a brief afternoon storm (you'll be resting) · Sunset 8:26 PM</p>
+    </div>
+  </div>
+  <ul class="stops">
+    <li class="stop"><span class="time">10:00 AM</span>
+      <div class="body"><h3>Graze breakfast — <a href="https://www.chelseamarket.com" target="_blank" rel="noopener">Chelsea Market</a></h3>
+      <p>Old Nabisco factory turned food hall. The one order that matters: the adobada taco at <b>Los Tacos No. 1</b>. Share things; lunch is a pizza slice.</p>
+      <div class="meta"><span>Cab 15–20 min (not 8 — it's crosstown)</span><span>$15–25 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=Chelsea+Market+75+9th+Ave+New+York" target="_blank" rel="noopener">75 Ninth Ave</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">11:00 AM</span>
+      <div class="body"><h3>Walk the High Line, southbound</h3>
+      <p>Enter at the 16th St elevator next to the market, amble 40 minutes to the Gansevoort St end. Gardens on old rail tracks, Hudson on your right. Free, no ticket. <a href="https://littleisland.org" target="_blank" rel="noopener">Little Island</a> is 3 minutes from the exit — add it only if you're both feeling it.</p>
+      <div class="meta"><span>Free</span><span><a href="https://www.google.com/maps/search/?api=1&query=High+Line+16th+Street+entrance+New+York" target="_blank" rel="noopener">16th St entrance</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">12:15 PM</span>
+      <div class="body"><h3>West Village stroll → the classic slice at <a href="https://www.joespizzanyc.com" target="_blank" rel="noopener">Joe's Pizza</a></h3>
+      <p>Wander east through the prettiest streets in Manhattan — Grove St (the <i>Friends</i> corner), Commerce St — to Washington Square's arch and fountain. Lunch is the canonical fold-and-eat slice at Joe's on Carmine. $4, standing up, perfect.</p>
+      <div class="meta"><span>~1 hr amble</span><span>$4–8 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=Joe's+Pizza+7+Carmine+St+New+York" target="_blank" rel="noopener">7 Carmine St</a></span></div></div>
+    </li>
+    <li class="stop rest"><span class="time">2:00 PM</span>
+      <div class="body"><h3>Back to the hotel. Rest is the plan, not a gap.</h3>
+      <p>Cab home, A/C, nap, shower. If a storm pops this afternoon, it happens while you're horizontal. Flat shoes and a light layer for the boat — the river breeze is real.</p>
+      <div class="meta"><span>Cab ~15 min</span></div></div>
+    </li>
+    <li class="stop"><span class="time">5:20 PM</span>
+      <div class="body"><h3>Leave for Chelsea Piers — <a href="https://www.sail-nyc.com" target="_blank" rel="noopener">sunset schooner sail</a>, 6:15 PM</h3>
+      <p>Friday-evening traffic to the piers runs 20–25 minutes, and boarding closes early — hence the 5:20 cab for a boat that sails at 6:15. Two hours on the schooner <b>Adirondack</b>, drink in hand, gliding past the Statue of Liberty in golden light.</p>
+      <p class="why">This is the single most romantic thing on the itinerary. Don't be the couple running down the pier.</p>
+      <div class="meta"><span>Cab 20–25 min</span><span>$78–98 pp, 1 drink incl.</span><span><a href="https://www.google.com/maps/search/?api=1&query=Chelsea+Piers+Pier+62+New+York" target="_blank" rel="noopener">Pier 62, W 22nd St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">9:15 PM</span>
+      <div class="body"><h3>Late dinner — <a href="https://www.lartusi.com" target="_blank" rel="noopener">L'Artusi</a></h3>
+      <p>Candlelit, sceney, best-in-class pasta, 10 minutes from the boat. You'll walk off the water starving at 8:30 — the 9:15 table is deliberate. Then home; Saturday is the big one.</p>
+      <div class="meta"><span>Cab 10 min from the piers</span><span>~$80–110 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=L'Artusi+228+W+10th+St+New+York" target="_blank" rel="noopener">228 W 10th St</a></span></div></div>
+    </li>
+  </ul>
+  <p class="swap"><b>If L'Artusi is full:</b> <a href="https://balthazarny.com" target="_blank" rel="noopener">Balthazar</a>'s big Parisian room almost always has a late table — then swap Sunday brunch for its sister café. One booking problem, one move.</p>
+</section>
+
+<!-- ============ SATURDAY ============ -->
+<section class="day">
+  <div class="dayhead">
+    <div class="bullet">18</div>
+    <div class="t">
+      <h2>Saturday — Central Park, then Broadway</h2>
+      <p>Best weather of the trip (86–89°F, low humidity) · The one early start — the rowboat is why</p>
+    </div>
+  </div>
+  <ul class="stops">
+    <li class="stop"><span class="time">9:00 AM</span>
+      <div class="body"><h3>Real bagels — <a href="https://www.ess-a-bagel.com" target="_blank" rel="noopener">Ess-a-Bagel</a>, then the subway uptown</h3>
+      <p>On the way to Herald Square: giant hand-rolled bagels — one with a schmear, one with lox, split both. Then the N/R/W from 34th St to Fifth Av/59th St, straight to the park's front door.</p>
+      <div class="meta"><span>12-min walk + 15-min subway</span><span>$8–14 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=Ess-a-Bagel+108+W+32nd+St+New+York" target="_blank" rel="noopener">108 W 32nd St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">9:45 AM</span>
+      <div class="body"><h3>Central Park: The Mall → Bethesda Terrace → the rowboats</h3>
+      <p>Walk the elm cathedral of The Mall to Bethesda Fountain (the movie location), then be at the <b>Loeb Boathouse by 10:30</b> — rowboats are first-come, card-only, and the line forms by 11. $30 for the boat, an hour on The Lake, Bow Bridge drifting past. You row. She laughs. This is the trip highlight that costs $30.</p>
+      <div class="meta"><span>Free park · $30/boat/hr</span><span><a href="https://www.google.com/maps/search/?api=1&query=Loeb+Boathouse+Central+Park" target="_blank" rel="noopener">Boathouse, E 72nd St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">12:15 PM</span>
+      <div class="body"><h3>Strawberry Fields → the warm cookie at <a href="https://levainbakery.com" target="_blank" rel="noopener">Levain Bakery</a></h3>
+      <p>Exit past the <i>Imagine</i> mosaic to the original Levain on W 74th. One warm 6-oz chocolate-chip-walnut cookie, two forks. (You'll regret splitting it. Get two.)</p>
+      <div class="meta"><span>10-min walk</span><span>$5–7</span><span><a href="https://www.google.com/maps/search/?api=1&query=Levain+Bakery+167+W+74th+St+New+York" target="_blank" rel="noopener">167 W 74th St</a></span></div></div>
+    </li>
+    <li class="stop rest"><span class="time">1:15 PM</span>
+      <div class="body"><h3>Home. Afternoon completely off.</h3>
+      <p>Subway from 72nd St (~35 min door to door) or a cab. Then nothing until dinner: nap, pool, order room service, whatever. You've done the park; tonight is theater. Two anchors, and the space between them is the luxury.</p>
+      <div class="meta"><span>Subway ~35 min / cab ~25 min</span></div></div>
+    </li>
+    <li class="stop"><span class="time">5:45 PM</span>
+      <div class="body"><h3>Pre-theater dinner — <a href="https://www.theclocktowernyc.com" target="_blank" rel="noopener">The Clocktower</a></h3>
+      <p>Michelin-starred, gorgeous rooms inside the Met Life clock tower, <b>4 minutes' walk from the hotel</b> — and, unlike the famous names, actually bookable this week. Tell them you have an 8 PM curtain; they'll pace you out by 7:10.</p>
+      <div class="meta"><span>4-min walk</span><span>~$110–150 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=The+Clocktower+5+Madison+Ave+New+York" target="_blank" rel="noopener">5 Madison Ave</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">7:15 PM</span>
+      <div class="body"><h3>Subway to the theater — <b>not a cab</b></h3>
+      <p>N/R/W from 28th St to 49th St, 15 minutes, drops you two blocks from the Gershwin. A 7:30 Saturday-night cab into Times Square is how people miss curtain — Broadway holds for no one.</p>
+      <div class="meta"><span>Subway 15 min · $2.90</span></div></div>
+    </li>
+    <li class="stop"><span class="time">8:00 PM</span>
+      <div class="body"><h3><a href="https://wickedthemusical.com" target="_blank" rel="noopener">Wicked</a> — Gershwin Theatre</h3>
+      <p>The first-timer pick: spectacle, songs she knows, and "Defying Gravity" into intermission. Afterward, walk two blocks into <b>Times Square lit up at night</b> — five minutes, mandatory once, then escape downtown.</p>
+      <div class="meta"><span>From ~$112 pp — buy direct</span><span><a href="https://www.google.com/maps/search/?api=1&query=Gershwin+Theatre+222+W+51st+St+New+York" target="_blank" rel="noopener">222 W 51st St</a></span></div></div>
+    </li>
+  </ul>
+  <p class="swap"><b>Museum people?</b> Swap the afternoon rest for 90 minutes at <a href="https://www.metmuseum.org" target="_blank" rel="noopener">The Met</a> — Temple of Dendur plus the Costume Art show she'd love. But do not do the park <i>and</i> the Met <i>and</i> Broadway in one day; that's the old itinerary's mistake. <b>Night owls:</b> the <a href="https://www.google.com/maps/search/?api=1&query=The+Fleur+Room+105+W+28th+St+New+York" target="_blank" rel="noopener">Fleur Room</a> rooftop near the hotel pours until 4 AM.</p>
+</section>
+
+<!-- ============ SUNDAY ============ -->
+<section class="day">
+  <div class="dayhead">
+    <div class="bullet">19</div>
+    <div class="t">
+      <h2>Sunday — Slow brunch, Brooklyn finale</h2>
+      <p>Coolest day (77–86°F) · Morning rain clears by ~1 PM — the plan is indoors until then · Sunset 8:25 PM</p>
+    </div>
+  </div>
+  <ul class="stops">
+    <li class="stop"><span class="time">10:30 AM</span>
+      <div class="body"><h3>Sleep in. Pack. Coffee downstairs.</h3>
+      <p>Arrange late checkout or leave bags with the desk. If it's raining, it's raining on your coffee cup, not your plans.</p></div>
+    </li>
+    <li class="stop"><span class="time">11:30 AM</span>
+      <div class="body"><h3>Brunch — <a href="https://balthazarny.com" target="_blank" rel="noopener">Balthazar</a>, SoHo</h3>
+      <p>The iconic Parisian brasserie — movie-set room, rain-proof, made for a lazy Sunday. Afterward, an easy stroll through SoHo's cast-iron blocks and Nolita. Still hungry somehow? The pepperoni square at <b>Prince Street Pizza</b> is a 5-minute detour.</p>
+      <div class="meta"><span>Cab 10–12 min from hotel</span><span>$40–60 pp</span><span><a href="https://www.google.com/maps/search/?api=1&query=Balthazar+80+Spring+St+New+York" target="_blank" rel="noopener">80 Spring St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">3:30 PM</span>
+      <div class="body"><h3>Subway to the Brooklyn Bridge → walk it toward Brooklyn</h3>
+      <p>6 train from Spring St to Brooklyn Bridge–City Hall, then onto the boardwalk. Walking <b>toward</b> Brooklyn puts the skyline behind her for every photo. Give it a full hour with stops; take the first off-ramp toward Washington St.</p>
+      <div class="meta"><span>Subway 12 min + 60-min walk</span><span>Free</span><span><a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge+pedestrian+entrance+City+Hall" target="_blank" rel="noopener">Bridge entrance</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">5:15 PM</span>
+      <div class="body"><h3>DUMBO: the Washington St shot + Jane's Carousel</h3>
+      <p>The Manhattan Bridge framed down Washington St is <i>the</i> photo. Then a $3 spin on the 1922 carousel in its glass box on the river, and the waterfront lawns until dinner.</p>
+      <div class="meta"><span>On foot</span><span>Carousel $3</span><span><a href="https://www.google.com/maps/search/?api=1&query=Washington+Street+DUMBO+Brooklyn" target="_blank" rel="noopener">Washington & Water St</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">6:30 PM</span>
+      <div class="body"><h3>Farewell dinner — <a href="https://rivercafe.com" target="_blank" rel="noopener">The River Café</a></h3>
+      <p>Michelin star directly under the bridge: flowers, piano, the skyline floating outside the window. The most romantic dining room in New York, full stop. <b>Jacket required, no jeans</b> — this is why you packed one.</p>
+      <div class="meta"><span>5-min walk</span><span>$195 pp prix fixe + drinks</span><span><a href="https://www.google.com/maps/search/?api=1&query=The+River+Cafe+1+Water+St+Brooklyn" target="_blank" rel="noopener">1 Water St, Brooklyn</a></span></div></div>
+    </li>
+    <li class="stop"><span class="time">8:25 PM</span>
+      <div class="body"><h3>Sunset over the skyline, then a yellow cab home over the bridge</h3>
+      <p>Two minutes to the Pebble Beach lawn: the sun drops behind the buildings you just walked from. The cab ride back over the bridge, lights on the water, is the finale itself.</p>
+      <div class="meta"><span>Cab home ~25 min · $30–40</span></div></div>
+    </li>
+  </ul>
+  <p class="swap"><b>Flying out Sunday night?</b> Move dinner to 5:30 (they open at 5) and allow 75+ min to JFK/EWR from Brooklyn by car. <b>Want the same view for half the bill?</b> <a href="https://cecconisdumbo.com" target="_blank" rel="noopener">Cecconi's Dumbo</a> is on the same block — terrace, skyline, ~$450 saved.</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<section>
+  <p class="kicker">Everything else you need</p>
+  <h2>Six things to know, one secret weapon</h2>
+  <div class="facts" style="margin-top:1.2rem">
+    <div><b>Getting around</b>No MetroCard — tap your phone or credit card at any turnstile ($2.90). Subway wins daytime; cabs win late-night.</div>
+    <div><b>Heat</b>Thursday hits 92°: water bottle, sunscreen, outdoors before noon and after 5. Every interior is arctic — she'll want a light layer.</div>
+    <div><b>Reservations</b>NYC holds tables 15 minutes. Running late, call. Add "her first New York trip" to every booking note.</div>
+    <div><b>Tipping</b>20% at restaurants, $2/drink at bars, 15–20% in cabs.</div>
+    <div><b>Packing</b>One jacket (River Café requires it), broken-in shoes (15k+ steps/day), pocket umbrella Fri–Sun.</div>
+    <div><b>The secret weapon</b><a href="https://patentpendingnyc.com" target="_blank" rel="noopener">Patent Pending</a> — a speakeasy behind a fake coffee counter, 3 min from the hotel. Don't tell her where you're going.</div>
+  </div>
+  <div class="budget">
+    <b>Budget for two, all-in: ≈ $2,300–2,700.</b> Biggest lever: swap the River Café for Cecconi's and save ~$450 with the same view.
+  </div>
+</section>
+
+<footer>
+  Weather and availability verified July 10, 2026. Prices are per person unless marked. Booking pages open in a new tab.
+</footer>
+</div>
+
+</html>
